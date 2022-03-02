@@ -35,7 +35,6 @@ module.exports = {
         const user = await jwt.verify(cookies.jwt, "myjsonsecret");
         const getUser = await User.findOne({ _id: user.id });
         req.user = getUser;
-        req.utype = getUser.type;
         // req.token = cookies.refresh;
         return next();
       } catch (err) {

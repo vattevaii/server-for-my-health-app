@@ -1,4 +1,4 @@
-const mongoose = require(mongoose);
+const mongoose = require("mongoose");
 
 const AdminSchema = new mongoose.Schema(
    {
@@ -19,10 +19,6 @@ const AdminSchema = new mongoose.Schema(
          ],
          required: true,
       },
-      userId: {
-         type: String,
-         required: true,
-      }
    }
 );
 

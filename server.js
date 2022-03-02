@@ -26,21 +26,23 @@ app.use(cors({
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
+const personRoutes = require("./routes/people");
 const docRoutes = require("./routes/doctor");
 
 // Create mongo connection
-// mongoose.connect(
-//   MONGO_URL,
-//   {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true,
-//     useFindAndModify: false,
-//   },
-//   () => console.log("connected to DB")
-// );
-// const conn = mongoose.createConnection(MONGO_URL);
+mongoose.connect(
+  MONGO_URL,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  },
+  () => console.log("connected to DB")
+);
+const conn = mongoose.createConnection(MONGO_URL);
 
 app.use("/api/users", userRoutes);
+app.use("/api/people", personRoutes);
 app.use("/api/authenticate", authRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/doctor", docRoutes);

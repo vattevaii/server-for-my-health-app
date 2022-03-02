@@ -21,11 +21,16 @@ const authController = {
   register: async (req, res, next) => {
     try {
       // GENERATE HASHED PASSWORD
+      console.log("req.body", req.body);
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
       const userExist = await User.findOne({ email: req.body.email });
+      console.log("req.body", userExist);
+
       const firstUser = await User.find();
+      console.log("req.body", firstUser);
+
       if (userExist)
         throw res
           .status(409)
@@ -36,11 +41,10 @@ const authController = {
         username: req.body.username,
         email: req.body.email,
         password: hashedPassword,
-        userType: firstUser.count() === 0 ? "admin" : "user",
-        isDoctor: req.body.isDoctor ? true : false,
-        validated: firstUser.count() === 0 ? true : false,
+        userType: firstUser.length === 0 ? "admin" : "user",
+        validated: firstUser.length === 0 ? true : false,
       });
-
+      console.log('new user', newUser)
       // SAVE USER AND RESPOND
       const user = await newUser.save();
 
@@ -51,14 +55,14 @@ const authController = {
 
       return res.status(200).json({ user, accessToken, refreshToken });
     } catch (error) {
-      res.status(500).send("Server Error");
+      res.status(500).send("Server Error" + error);
     }
   },
 
   login: async (req, res, next) => {
     try {
       const user = await User.findOne({ email: req.body.email });
-
+      console.log("fuckyou" + user);
       if (!user)
         throw res.status(401).send("User with this email doesn't exist.");
 

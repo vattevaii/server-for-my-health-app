@@ -25,14 +25,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-    userType: {
+    adminId: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user'
+      default: null,
     },
-    isDoctor: {
-      type: Boolean,
-      default: false
+    doctorId: {
+      type: String,
+      default: null,
     },
     validated: {
       type: Boolean,
