@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 
 // Mongo URI
-const mongoURI = "mongodb://brad:brad@ds257838.mlab.com:57838/mongouploads";
+const mongoURI = process.env.MONGO_URI;
 
 // Create mongo connection
 const conn = mongoose.createConnection(mongoURI);
